@@ -35,9 +35,9 @@ enve byl vytvořen s ohledem na flexibilitu a rozšiřitelnost.
 ## Stáhnout
 enve můžete stáhnout ve verzi pro <a href="https://github.com/MaurycyLiebner/enve/releases/continuous-linux/" target="_blank">Linux</a> a <a href="https://github.com/MaurycyLiebner/enve/releases/continuous-windows/" target="_blank">Windows</a>.
 
-## Source and building instructions
+## Instrukce pro sestavování
 
-See [Source and Building info.md](/Source%20and%20building%20info.md) for in-detail instructions for getting the source, and building for Linux, Windows, and macOS.
+Podívejte se do [Source and Building info.md](/Source%20and%20building%20info.md) pro pokyny pro získání zdrojového kódu pro sestavení na Linuxu, Windows a macOS.
 
 ## Autoři
 

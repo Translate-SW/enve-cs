@@ -41,9 +41,11 @@ Podívejte se do [Source and Building info.md](/Source%20and%20building%20info.m
 
 ## Autoři
 
-**Maurycy Liebner** - 2016 - 2020 - [MaurycyLiebner](https://github.com/MaurycyLiebner),
+**Maurycy Liebner** - 2016 - 2021 - [MaurycyLiebner](https://github.com/MaurycyLiebner),
 
-**Translate-SW (překlad do češtiny)** - 2021 - [Translate-SW](https://github.com/Translate-SW)
+## Překlad
+
+Překlad do češtiny: [**Translate-SW**](https://github.com/Translate-SW)
 
 ## Licence
 

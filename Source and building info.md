@@ -1,6 +1,6 @@
-- [Get Enve Source](#get-enve-source)
-- [Table of Contents (TOC)](#toc)
-- [License](#license)
+- [Získat zdrojové kódy enve](#get-enve-source)
+- [Obsahová tabulka](#toc)
+- [Licence](#license)
 
 #### TOC
 
@@ -47,137 +47,137 @@
 [C6]: #enve-2
 
 
-## Get Enve Source
+## Získat zdrojové kódy enve
 
-Make sure you have **git** installed on your system.
+Pro získání zdrojových kódu enve budete potřebovat mít nainstalovaný **git** ve vašem systému.
 
-Clone the enve repository:
+Naklonujte repozitář enve:
 ```
 git clone --recurse-submodules https://github.com/MaurycyLiebner/enve
 ```
-Enter enve directory:
+Přejděte do adresáře enve:
 ```
 cd enve
 ```
-Enter the folder with third party dependencies:
+Najděte složku se závislostmi třetích stran:
 ```
 cd third_party
 ```
-Apply enve-specific library patches (not needed for Windows):
+Použijte záplaty specifické pro knihovnu enve (pro Windows to není potřeba):
 ```
 make patch
 ```
 
-<h1 align="center">Building for Linux</h1>
+<h1 align="center">Sestavení na Linuxu</h1>
 
-Some of the provided terminal commands are applicable only to Ubuntu 16.04 and 18.04.
-If you are using a different distribution please treat the commands as a general guide.
+Některé z uvedených příkazů, jsou použitelné pouze pro Ubuntu 16.04 a 18.04.
+Pokud používáte jinou distribuci, berte tyto příkazy spíše jako obecný návod.
 
 ### Skia
 
-Enter the skia directory:
+Přejděte do adresáře Skia:
 ```
 cd skia
 ```
-Synchronize the skia dependencies:
+Synchronizujte závislosti skia:
 ```
 python tools/git-sync-deps
 ```
-Install the skia dependencies:
+Nainstalujte závislosti Skia:
 ```
 tools/install_dependencies.sh
 ```
-Install g++-7:
+Nainstalujte g++-7:
 ```
 sudo add-apt-repository ppa:jonathonf/gcc
 sudo apt-get update
 sudo apt-get install g++-7
 ```
-Download ninja, extract, and set permission for the executable:
+Stáhněte si aplikaci Ninja, rozbalte ji a nastavte oprávnění pro spustitelný soubor:
 ```
 wget https://github.com/ninja-build/ninja/releases/download/v1.9.0/ninja-linux.zip
 sudo apt-get install unzip
 unzip ninja-linux.zip
 chmod +x ninja
 ```
-Create the release build (ninja) files:
+Vytvořte sestavenou verzi (ninja) souborů:
 ```
 bin/gn gen out/Release --args='is_official_build=true is_debug=false extra_cflags=["-Wno-error"] target_os="linux" target_cpu="x64" skia_use_system_expat=false skia_use_system_freetype2=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false skia_use_system_icu=false skia_use_system_harfbuzz=false cc="gcc-7" cxx="g++-7"'
 ```
-Build a release version of skia (you can use more than 2 threads):
+Sestavte vydání Skia (můžete použít více než 2 vlákna):
 ```
 ./ninja -C out/Release -j 2 skia
 ```
-If you want, you can also build a debug version:
+Pokud chcete, můžete sestavit také odladěnou verzi:
 ```
 bin/gn gen out/Debug --args='extra_cflags=["-Wno-error"] cc="gcc-7" cxx="g++-7"'
 ./ninja -C out/Debug -j 2 skia
 ```
 
-Go back to the third_party folder:
+Přejděte zpět do svého domovského adresáře:
 ```
 cd ..
 ```
 
 ### Libmypaint
-Install libmypaint dependencies:
+Nainstalujte závislosti Libmypaint
 ```
 sudo apt-get install libjson-c-dev intltool pkg-config
 ```
-Enter libmypaint directory:
+Přejděte do adresáře libmypaint:
 ```
 cd libmypaint
 ```
-Set CFLAGS for better optimization:
+Nastavte CFLAGS pro lepší optimalizaci:
 ```
 export CFLAGS='-fopenmp -Ofast -ftree-vectorize -fopt-info-vec-optimized -funsafe-math-optimizations -funsafe-loop-optimizations -fPIC'
 ```
-Configure libmypaint:
+Upravte libmypaint:
 ```
 ./configure --enable-static --enable-openmp --enable-shared=false
 ```
-Build libmypaint:
+Sestavte libmypaint:
 ```
 sudo make
 ```
-Go back to the third_party folder:
+Přejděte zpět do svého domovského adresáře:
 ```
 cd ..
 ```
 
 ### Gperftools
-Install packages needed to build gperftools:
+Nainstalujte balíčky, potřebné pro sestavení Gperftools:
 ```
 sudo apt-get install autoconf automake libtool
 sudo apt-get install libunwind-dev
 ```
 
-Build gperftools:
+Sestavte gperftools:
 ```
 cd gperftools
 ./autogen.sh
 ./configure --prefix /usr
 make
 ```
-Go back to the third_party folder:
+Přejděte zpět do svého domovského adrsáře:
 ```
 cd ..
 ```
 ### Qt
 
-Go to qt.io/download to download Open Source Qt installer.
-Install Qt 5.12.4 Desktop gcc 64-bit.
+Jděte na qt.io/download Pro stažení otevřeného Qt instalátoru:
+Nainstalujte Qt 5.12.4 Desktop gcc 64-bit.
 
-Install Qt in the directory of your choice (ex. ~/.Qt)
+Nainstalujte Qt do vybraného adresáře (ex. ~/.Qt)
 
 ### QScintilla
-Build QScintilla:
+Sestavte QScintilla:
 ```
 cd qscintilla/Qt4Qt5
 qmake
 make -j 2
 ```
-Go back to the third_party folder:
+Přejděte zpět do svého domovského adrsáře:
 ```
 cd ..
 ```
@@ -189,77 +189,77 @@ qmake INCLUDEPATH+=$$[QT_INSTALL_HEADERS]/QtZlib
 make -j 2
 ```
 
-Go back to the main enve directory:
+Vraťte se zpět do hlavního adresáře enve:
 ```
 cd ../../../
 ```
 
 ### FFmpeg
-Install libraries needed for audio/video decoding/encoding.
+Nainstalujte knihovny, potřebné pro přehrávání videa a audia:
 ```
 sudo add-apt-repository ppa:jonathonf/ffmpeg-4
 sudo apt-get update
 sudo apt-get install libswresample-dev libswscale-dev libavcodec-dev libavformat-dev libavresample-dev
 ```
 
-### Other
-enve dependencies:
+### Jiné
+závislosti enve:
 ```
 sudo apt-get install libglib2.0-dev
 ```
-Install libxkbcommon-x11-dev to run QtCreator on Ubuntu 16.04.
-Otherwise it will not execute properly.
+Nainstalujte libxkbcommon-x11-dev pro spuštění QtCreator v Ubuntu 16.04.
+Jinak se nespustí správně.
 ```
 sudo apt-get install libxkbcommon-x11-dev
 ```
 
 ### enve
 
-You can either build enve through QtCreator (open enve.pro and setup Relase/Debug Kits),
-or by running qmake and make directly.
+Enve můžete sestavit buď prostřednictvím QtCreator (otevřete soubor enve.pro a nastavte Relase/Debug Kits),
+nebo přímo spuštěním qmake a make.
 
-By default qmake is not installed in /usr/bin.
-You will have to call it by its full path or create a symbolic link:
+Ve výchozím nastavení není qmake nainstalován v /usr/bin.
+Budete jej muset zavolat jeho plnou cestou nebo vytvořit symbolický odkaz:
 ```
 sudo ln -s your_Qt_dir/5.12.4/gcc_64/bin/qmake /usr/bin/qmake
 ```
 
-Build a release version of enve:
+Sestavte vydanou verzi enve:
 ```
 cd build/Release
 qmake ../../enve.pro
 make CC=gcc-7 CPP=g++-7 CXX=g++-7 LD=g++-7
 cd ..
 ```
-Build a debug version of enve (if needed):
+Stahněte si ladící verzi enve (je to nutné):
 ```
 cd Debug
 qmake CONFIG+=debug ../../enve.pro
 make CC=gcc-7 CPP=g++-7 CXX=g++-7 LD=g++-7
 cd ..
 ```
-Now you have successuly build enve and libenvecore along with all the examples.
-If you wish to create your own executable proceed to the **Deployment** section.
+Nyní jste úspěšně sestavili enve a libenvecore spolu se všemi příklady.
+Pokud si přejete vytvořit vlastní spustitelný soubor, přejděte k části **Uvedení do provozu**.
 
-## Deploying for Linux
+## Ladění na Linuxu
 
-Make sure you are in the build directory.
+Ujistěte se, že jste v adresáři pro sestavení.
 
-### Download needed tools
+### Stáhněte potřebné nástroje
 
-Download and change permission for LinuxDeployQt:
+Stažení a změna oprávnění pro LinuxDeployQt:
 ```
 wget https://github.com/probonopd/linuxdeployqt/releases/download/6/linuxdeployqt-6-x86_64.AppImage
 chmod +x linuxdeployqt-6-x86_64.AppImage
 ```
-Copy the enve build into the AppDir:
+Zkopírujte sestavení enve do souboru AppDir:
 ```
 cp Release/src/app/enve AppDir/usr/bin/
 cp -av Release/src/core/*.so* AppDir/usr/lib/
 ```
 
-#### Support older systems (ex. Ubuntu 16.04)
-Download patched AppRun binary and an associated library that will link a newer version of libstdc++ on older systems:
+#### Podpora pro jiné systémy (ex. Ubuntu 16.04)
+Stáhněte si opravenou binární knihovnu AppRun a přidruženou knihovnu, která umožní propojení novější verze libstdc++ na starších systémech:
 ```
 wget https://github.com/darealshinji/AppImageKit-checkrt/releases/download/continuous/AppRun-patched-x86_64
 mv AppRun-patched-x86_64 AppRun
@@ -271,47 +271,47 @@ wget https://github.com/darealshinji/AppImageKit-checkrt/releases/download/conti
 mv exec-x86_64.so exec.so
 cp exec.so AppDir/usr/optional
 ```
-Copy your system's version of libstdc++ to your AppDir:
+Zkopírujte systémovou verzi libstdc++ do svého AppDiru:
 ```
 mkdir AppDir/usr/optional/libstdc++
 cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 AppDir/usr/optional/libstdc++/
 ```
 
-#### Create AppImage
+#### Vytvoření AppImage
 
-Create the AppImage using LinuxDeployQt:
+Vytvořte AppImage pomocí nástroje LinuxDeployQt:
 ```
 ./linuxdeployqt-6-x86_64.AppImage AppDir/usr/share/applications/enve.desktop -appimage
 ```
 
-You have successfuly created your own enve AppImage!
+A nyní máte vytvořený AppImage aplikace enve!
 
-<h1 align="center">Building for Windows</h1>
+<h1 align="center">Sestavení pro Windows</h1>
 
 ### Visual Studio Community 2017
 
-Install Visual Studio Community 2017 from **https://visualstudio.microsoft.com/vs/older-downloads**.	
-Make sure to install **Desktop development with C++**
+Nainstalujte si Visual Studio Community 2017 ze stránek **https://visualstudio.microsoft.com/vs/older-downloads**.	
+Ujistěte se, že jste nainstalovali **Vývoj na stolním počítači s C++**.
 
 ### Qt
 
-Go to qt.io/download to download Open Source Qt installer.
-Install Qt 5.12.4 Desktop MSVC 2017 64-bit.
+Přejděte na qt.io/download pro stažení otevřeného Qt instalátoru.
+Nainstalujte Qt 5.12.4 Desktop MSVC 2017 64-bit.
 
 ### LLVM
 
-Download the latest stable LLVM relese from **https://github.com/llvm/llvm-project/releases**, e.g., **LLVM-10.0.0-win64.exe**.
-Install LLVM.
+Stáhněte si nejnovější stabilní verzi LLVM z **https://github.com/llvm/llvm-project/releases**, např. **LLVM-10.0.0-win64.exe**.
+Nainstalujte LLVM.
 
-### Environment
+### Prostředí
 
-Run all commands from **Qt 5.12.4 (MSVC 2017 64-bit)** command line.
-Remeber to call vcvarsall.bat to initialize MSVC environment, e.g.,
+Spusťte všechny příkazy z příkazového řádku **Qt 5.12.4 (MSVC 2017 64-bit)**.
+Nezapomeňte zavolat soubor vcvarsall.bat pro inicializaci prostředí MSVC, např,
 `"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x64`.
 
-### FFmpeg and Libmypaint
+### FFmpeg a Libmypaint
 
-Use batch script to download prebuilt libraries:
+Ke stažení předpřipravených knihoven použijte batch skript:
 ```
 cd third_party
 win.bat
@@ -335,8 +335,8 @@ nmake
 
 ### Skia
 
-Enter Skia directory:
 
+Přejděte do adresáře Skia:
 ```
 cd skia
 ```
@@ -345,19 +345,18 @@ cd skia
 python tools/git-sync-deps
 ```
 
-Configure the release build:
-
+Upravte vydání sestavení:
 ```
 bin\gn.exe gen out/Release --args="is_official_build=true is_debug=false extra_cflags=[\"-Wno-error\",\"/MD\",\"/O2\"] target_os=\"windows\" host_os=\"win\" current_os=\"win\" target_cpu=\"x64\" clang_win=\"C:\Program Files\LLVM\" cc=\"clang-cl\" cxx=\"clang-cl\" skia_use_system_expat=false skia_use_system_icu=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false skia_use_system_harfbuzz=false" --ide=vs
 ```
 
-Enter the build directory:
 
+Přejděte do sestavovacího adresáře:
 ```
 cd out\Release
 ```
 
-Build Skia:
+Sestavte Skia:
 
 ```
 msbuild all.sln
@@ -370,9 +369,9 @@ qmake enve.pro -spec win32-clang-msvc -config release
 nmake
 ```
 
-<h1 align="center">Building for macOS</h1>
+<h1 align="center">Sestavení pro macOS</h1>
 
-Install build dependencies for third-party libraries from Homebrew.
+Nainstalujte závislosti sestavení pro knihovny třetích stran z Homebrew.
 ```sh
 brew install ninja json-c intltool pkg-config gettext zlib ffmpeg
 ```
@@ -435,6 +434,6 @@ qmake enve.pro -spec macx-clang CONFIG+=release
 make
 ```
 
-## License
+## Licence
 
-This project is licensed under the GPL3 License - see the [LICENSE.md](LICENSE.md) file for details
+Tento projekt je uvolněn pod GPL3 licencí - podívejte se do [LICENSE.md](LICENSE.md) pro více informací.

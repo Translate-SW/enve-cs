@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
     const bool threadedOpenGL = QOpenGLContext::supportsThreadedOpenGL();
     if(!threadedOpenGL) {
         gPrintException("Ovladače vaší Grafické karty nepodporují OpenGL."
-                        "renderování mimo hlavní vlákno.");
+                        "...");
     }
     try {
         HardwareInfo::sUpdateInfo();
@@ -157,7 +157,7 @@ int main(int argc, char *argv[]) {
         generateAlphaMesh(alphaMesh, size/2);
     });
     ALPHA_MESH_PIX = &alphaMesh;
-    std::cout << "Generated Alpha Mesh" << std::endl;
+    std::cout << "Generování Alpha Mesh" << std::endl;
 
     //#ifdef QT_DEBUG
     //    const qint64 pId = QCoreApplication::applicationPid();
@@ -196,7 +196,7 @@ int main(int argc, char *argv[]) {
     eWidgetsImpl widImpl;
     ImportHandler importHandler;
 
-    splash->showMessage("Initialize task scheduler...");
+    splash->showMessage("Inicializace task scheduler...");
     app.processEvents();
     MemoryHandler memoryHandler;
     TaskScheduler taskScheduler;
@@ -219,15 +219,15 @@ int main(int argc, char *argv[]) {
         gPrintExceptionFatal(e);
     }
 
-    splash->showMessage("Načítání enve efektů...");
+    splash->showMessage("Načítání efektů enve...");
     app.processEvents();
     effectsLoader.iniCustomPathEffects();
     std::cout << "Efekty se načetly" << std::endl;
 
-    splash->showMessage("Načítání enve Rasterových efektů...");
+    splash->showMessage("Načítání Rasterových efektů enve...");
     app.processEvents();
     effectsLoader.iniCustomRasterEffects();
-    std::cout << "enve Rasterové efekty se již načetly." << std::endl;
+    std::cout << "Rasterové efekty enve se již načetly." << std::endl;
 
     splash->showMessage("Načítání shaderových efektů...");
     app.processEvents();
@@ -245,10 +245,10 @@ int main(int argc, char *argv[]) {
     });
     std::cout << "Shader efekty se načetly" << std::endl;
 
-    splash->showMessage("Načítání enve objektů...");
+    splash->showMessage("Načítání objektů enve...");
     app.processEvents();
     effectsLoader.iniCustomBoxes();
-    std::cout << "enve objekty se načetly." << std::endl;
+    std::cout << " objekty enve se načetly." << std::endl;
 
     splash->showMessage("Načítá se audio...");
     app.processEvents();
